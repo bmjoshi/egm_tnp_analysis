@@ -150,7 +150,7 @@ Alternatively you can also use: etc/scripts/uproot_reweight.py using
 python3 etc/scripts/uproot_reweight.py
 
 **Note**: ou would need to install awkward, uproot, matplotlib using the following command:
-```bash
+```
 pip3 install --user uproot matplotlib, awkward
 ```
 
