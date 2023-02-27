@@ -134,9 +134,9 @@ to the fitter. One can handle complex flags with a cut string (root cut string):
     
     Define in this section the init parameters for the different fit, can be tuned to improve convergence.
 
-====================
-   
-##  Update PU weights 
+## Condor Submission
+
+Change the paths in run.sh and use the generate_jobs.py file to generate multiple batch jobs. For adding new IDs, update the dictionary in the generate_jobs.py file to include the new custom IDs.
 
 ##  Update PU weights 
 
