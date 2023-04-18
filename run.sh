@@ -1,7 +1,7 @@
 #! /bin/bash
 echo $PWD
 echo "Setting environment"
-workdir="<path-to-egm-in0afs>/egm_tnp_analysis";
+workdir="<path-to-egm-in-afs>/egm_tnp_analysis";
 cmssw_path="<path-to-cmssw>/CMSSW_10_2_8/src";
 cd $cmssw_path; cmsenv; cd $workdir
 export PYTHONPATH=$workdir;
