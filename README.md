@@ -134,9 +134,9 @@ to the fitter. One can handle complex flags with a cut string (root cut string):
     
     Define in this section the init parameters for the different fit, can be tuned to improve convergence.
 
-====================
-   
+## Condor Submission
 
+Change the paths in run.sh and use the generate_jobs.py file to generate multiple batch jobs. For adding new IDs, update the dictionary in the generate_jobs.py file to include the new custom IDs.
 
 ##  Update PU weights 
 
@@ -144,6 +144,17 @@ to the fitter. One can handle complex flags with a cut string (root cut string):
 
 Here one has to update the name of the directory whre the files will be located and the corresponding names.
 
+Alternatively you can also use: etc/scripts/uproot_reweight.py using
+
+```
+python3 etc/scripts/uproot_reweight.py
+```
+**Note**: ou would need to install awkward, uproot, matplotlib using the following command:
+```
+pip3 install --user uproot matplotlib, awkward
+```
+
+One can also install a conda environment with all the packages so that they don't have to be nistalled every time you make a fresh login into lxplus.
 
 2.This pyhton uses the following: libPython/puReweighter.py.
 
