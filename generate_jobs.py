@@ -3,8 +3,15 @@ import os
 # use the script to generate condor jobs
 # this will generate a submission file that submits all the jobs to condor
 
-electron_94X_ids = ['passingMVA94Xwp80isoV2','passingMVA94Xwp80noisoV2','passingMVA94Xwp90isoV2','passingMVA94Xwp90noisoV2',
-        'passingCutBasedVeto94XV2','passingCutBasedLoose94XV2','passingCutBasedMedium94XV2','passingCutBasedTight94XV2']
+electron_94X_ids = ['passingMVA94Xwp80isoV2',
+                    'passingMVA94Xwp80noisoV2',
+                    'passingMVA94Xwp90isoV2',
+                    'passingMVA94Xwp90noisoV2',
+                    'passingCutBasedVeto94XV2',
+                    'passingCutBasedLoose94XV2',
+                    'passingCutBasedMedium94XV2',
+                    'passingCutBasedTight94XV2']
+
 photon_94X_ids = [
     'passingCutBasedLoose94XV2'     ,
     'passingCutBasedMedium94XV2'    ,
@@ -13,10 +20,10 @@ photon_94X_ids = [
     'passingMVA94XV2wp90'           ]
 
 cfgfiles = {
-        'pho_94X_2022BC': 'etc/config/settings_pho_run2022BC.py',
-        'pho_94X_2022EFG': 'etc/config/settings_pho_run2022EFG.py',
-        'ele_94X_2022BC': 'etc/config/settings_ele_run2022BC.py',
-        'ele_94X_2022EFG': 'etc/config/settings_ele_run2022EFG.py'
+        'pho_94X_2022BC': 'etc/config/settings_pho_run2022BC_RunIIUL_binning.py',
+        'pho_94X_2022EFG': 'etc/config/settings_pho_run2022EFG_RunIIUL_binning.py',
+        'ele_94X_2022BC': 'etc/config/settings_ele_run2022BC_RunIIUL_binning.py',
+        'ele_94X_2022EFG': 'etc/config/settings_ele_run2022EFG_RunIIUL_binning.py'
         }
 
 idmap = {
@@ -33,7 +40,7 @@ def generate_jobs(cfgfile, jobtag, ids):
    '''
    jobs = []
    for id_ in ids:
-        with open('condor.sub','r') as f0:
+        with open('condor_bjoshi.sub','r') as f0:
            lines = f0.readlines()
         jobfile = 'condor_{}_{}.sub'.format(id_, jobtag)
         with open(jobfile,'w') as f0:

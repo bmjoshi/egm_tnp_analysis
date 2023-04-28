@@ -130,13 +130,15 @@ def EffiGraph1D(effDataList, effMCList, sfList ,nameout, xAxis = 'pT', yAxis = '
         xMin = 0.0
 
     effminmax =  findMinMax( effDataList )
-    effiMin = effminmax[0]
-    effiMax = effminmax[1]
+    #effiMin = effminmax[0]
+    #effiMax = effminmax[1]
+    effiMin = 0.2
+    effiMax = 1.4
 
     sfminmax =  findMinMax( sfList )
     sfMin = sfminmax[0]
-#    sfMin = 0.94
-#    sfMax = 1.02
+    sfMin = 0.78
+    sfMax = 1.12
 
     for key in sorted(effDataList.keys()):
         grBinsEffData = effUtil.makeTGraphFromList(effDataList[key], 'min', 'max')

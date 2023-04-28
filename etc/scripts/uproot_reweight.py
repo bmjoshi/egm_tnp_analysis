@@ -1,7 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # coding: utf-8
 
-import ROOT
 import gc
 import pickle
 
@@ -10,7 +9,8 @@ import numpy as np
 
 from matplotlib import pyplot as plt
 from matplotlib.patches import Patch
-from matplotlib.colors import to_rgb, to_rgba
+from matplotlib.colors import to_rgba, to_rgb
+
 
 #plt.style.use('cmsstyle') # use custom matplotlib style
 
@@ -69,16 +69,9 @@ plt.xlabel(config['puType'], fontsize=14)
 plt.ylabel('a.u.', fontsize=14)
 leg_elements = [Patch(facecolor=set_custom_alpha(to_rgb('tab:orange'), 0.5), edgecolor='tab:orange', label='MC', linewidth=2)]
 
-plt.legend(handles=leg_elements, loc='upper right', fontsize=14)
-    fontsize=18, fontweight='bold',
-    fontfamily='sans-serif',
-    horizontalalignment='left', 
-    verticalalignment='bottom')
+plt.legend(handles=leg_elements, loc='upper right',fontsize=18)
 year = plt.text(x=x_max, y=max_y*1.05, s=config['tag'],
-    fontsize=18,
-    fontfamily='sans-serif',
-    horizontalalignment='right', 
-    verticalalignment='bottom')
+    fontsize=18)
 plt.savefig('%s.png' % config['tag'])
 plt.close()
 

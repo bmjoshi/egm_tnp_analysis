@@ -15,3 +15,9 @@ condor/
 test.sh
 test.sub
 SubmitAll.sh
+
+#bjoshi batch scripts
+localrun.sh
+run_bjoshi.sh
+runlocal_ele_*.sh
+runlocal_pho_*.sh
