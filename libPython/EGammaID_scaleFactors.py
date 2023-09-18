@@ -128,6 +128,7 @@ def EffiGraph1D(effDataList, effMCList, sfList ,nameout, xAxis = 'pT', yAxis = '
     
     if 'abs' in xAxis or 'Abs' in xAxis:
         xMin = 0.0
+        print('ABS-----=======')
 
     effminmax =  findMinMax( effDataList )
     effiMin = effminmax[0]
@@ -244,7 +245,8 @@ def EffiGraph1D(effDataList, effMCList, sfList ,nameout, xAxis = 'pT', yAxis = '
     c.Print(nameout)
     listName = nameout.split('/')
     for iext in ["pdf","C","png"]:
-        c.SaveAs(nameout.replace('egammaEffi.txt_egammaPlots',listName[-6].replace('tnp','')+'_SFvs'+xAxis+'_'+listName[-3]).replace('pdf',iext))
+        tmpname = nameout.replace('egammaEffi.txt_egammaPlots',listName[-6].replace('tnp','')+'_SFvs'+xAxis+'_'+listName[-3]).replace('pdf',iext)
+        c.SaveAs(tmpname)
 
     return listOfTGraph2
 
@@ -348,6 +350,7 @@ def doEGM_SFs(filein, lumi, axis = ['pT','eta'] ):
                               pdfout, 
                               xAxis = axis[1], yAxis = axis[0] )
 
+    print("list:", listOfSF1D)
     h2EffData = effGraph.ptEtaScaleFactor_2DHisto(-3)
     h2EffMC   = effGraph.ptEtaScaleFactor_2DHisto(-2)
     h2SF      = effGraph.ptEtaScaleFactor_2DHisto(-1)

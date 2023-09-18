@@ -25,11 +25,11 @@ RooAbsPdf(name,title),
 RooCBExGaussShape::RooCBExGaussShape(const RooCBExGaussShape& other, const char* name):
   RooAbsPdf(other,name), 
   m("m",this,other.m),
-  m0(" m0",this,other. m0),
-  sigma(" sigma",this,other. sigma),
-  alpha(" alpha",this,other. alpha),
-  n(" n",this,other. n),
-  sigma_2(" sigma_2",this,other. sigma_2),
+  m0(" m0",this,other.m0),
+  sigma(" sigma",this,other.sigma),
+  alpha(" alpha",this,other.alpha),
+  n(" n",this,other.n),
+  sigma_2(" sigma_2",this,other.sigma_2),
   tailLeft(" tailL",this,other.tailLeft)
 
 {}

@@ -1,8 +1,15 @@
 import ROOT as rt
-rt.gROOT.LoadMacro('./libCpp/histFitter.C+')
-rt.gROOT.LoadMacro('./libCpp/RooCBExGaussShape.cc+')
-rt.gROOT.LoadMacro('./libCpp/RooCMSShape.cc+')
+#rt.gROOT.LoadMacro('./libCpp/histFitter.C+')
+#rt.gROOT.LoadMacro('./libCpp/RooCBExGaussShape.cc+')
+#rt.gROOT.LoadMacro('./libCpp/RooCMSShape.cc+')
+#rt.gROOT.LoadMacro('./libCpp/RooExpoShape.cc+')
+rt.gSystem.Load('./libCpp/histFitter_C.so')
+rt.gSystem.Load('./libCpp/RooCMSShape_cc.so')
+rt.gSystem.Load('./libCpp/RooCBExGaussShape_cc.so')
+rt.gSystem.Load('./libCpp/RooExpoShape_cc.so')
 rt.gROOT.SetBatch(1)
+
+print("done")
 
 from ROOT import tnpFitter
 
@@ -31,7 +38,7 @@ def createWorkspaceForAltSig( sample, tnpBin, tnpWorkspaceParam ):
                 x=re.compile('%s.*?' % par)
                 listToRM = filter(x.match, tnpWorkspaceParam)
                 for ir in listToRM :
-                    print '**** remove', ir
+                    print('**** remove', ir)
                     tnpWorkspaceParam.remove(ir)                    
             tnpWorkspaceParam.append( 'tailLeft[-1]' )
 
@@ -51,7 +58,7 @@ def createWorkspaceForAltSig( sample, tnpBin, tnpWorkspaceParam ):
     fitPar = fitresF.floatParsFinal()
     for ipar in range(len(fitPar)):
         pName = fitPar[ipar].GetName()
-        print '%s[%2.3f]' % (pName,fitPar[ipar].getVal())
+        print('%s[%2.3f]' % (pName,fitPar[ipar].getVal()))
         for par in listOfParam:
             if pName == par:
                 x=re.compile('%s.*?' % pName)
@@ -64,7 +71,7 @@ def createWorkspaceForAltSig( sample, tnpBin, tnpWorkspaceParam ):
     fitPar = fitresP.floatParsFinal()
     for ipar in range(len(fitPar)):
         pName = fitPar[ipar].GetName()
-        print '%s[%2.3f]' % (pName,fitPar[ipar].getVal())
+        print('%s[%2.3f]' % (pName,fitPar[ipar].getVal()))
         for par in listOfParam:
             if pName == par:
                 x=re.compile('%s.*?' % pName)
@@ -88,6 +95,7 @@ def histFitterNominal( sample, tnpBin, tnpWorkspaceParam ):
         "Gaussian::sigResFail(x,meanF,sigmaF)",
         "RooCMSShape::bkgPass(x, acmsP, betaP, gammaP, peakP)",
         "RooCMSShape::bkgFail(x, acmsF, betaF, gammaF, peakF)",
+        #"RooExpoShape::bkgFail(x, tau, peak)"
         ]
 
     tnpWorkspace = []
@@ -146,6 +154,7 @@ def histFitterAltSig( sample, tnpBin, tnpWorkspaceParam, isaddGaus=0 ):
         "RooCBExGaussShape::sigResFail(x,meanF,expr('sqrt(sigmaF*sigmaF+sosF*sosF)',{sigmaF,sosF}),alphaF,nF, expr('sqrt(sigmaF_2*sigmaF_2+sosF*sosF)',{sigmaF_2,sosF}),tailLeft)",
         "RooCMSShape::bkgPass(x, acmsP, betaP, gammaP, peakP)",
         "RooCMSShape::bkgFail(x, acmsF, betaF, gammaF, peakF)",
+        #"RooExpoShape::bkgFail(x, tau, peak)"
         ]
     if isaddGaus==1:
         tnpWorkspaceFunc += [ "Gaussian::sigGaussFail(x,meanGF,sigmaGF)", ]
@@ -203,7 +212,8 @@ def histFitterAltBkg( sample, tnpBin, tnpWorkspaceParam ):
         "Gaussian::sigResPass(x,meanP,sigmaP)",
         "Gaussian::sigResFail(x,meanF,sigmaF)",
         "Exponential::bkgPass(x, alphaP)",
-        "Exponential::bkgFail(x, alphaF)",
+        #"Exponential::bkgFail(x, alphaF)",
+        "RooExpoShape::bkgFail(x, f, tau1, tau2, peak1, peak2)"
         ]
 
     tnpWorkspace = []

@@ -27,7 +27,8 @@ class tnpFitter {
 public:
   tnpFitter( TFile *file, std::string histname  );
   tnpFitter( TH1 *hPass, TH1 *hFail, std::string histname  );
-  ~tnpFitter(void) {if( _work != 0 ) delete _work; }
+  //~tnpFitter(void) {if( _work != 0 ) delete _work; }
+  ~tnpFitter(){};
   void setZLineShapes(TH1 *hZPass, TH1 *hZFail );
   void setWorkspace(std::vector<std::string>, bool isaddGaus=false);
   void setOutputFile(TFile *fOut ) {_fOut = fOut;}
@@ -124,9 +125,14 @@ void tnpFitter::setWorkspace(std::vector<std::string> workspace, bool isaddGaus)
   _work->factory(TString::Format("nBkgP[%f,0.5,%f]",_nTotP*0.1,_nTotP*1.5));
   _work->factory(TString::Format("nSigF[%f,0.5,%f]",_nTotF*0.9,_nTotF*1.5));
   _work->factory(TString::Format("nBkgF[%f,0.5,%f]",_nTotF*0.1,_nTotF*1.5));
+  
+  //_work->factory(TString::Format("nSigF[%f,0.5,%f]",_nTotF*0.2,_nTotF*0.7));
+  //_work->factory(TString::Format("nBkgF[%f,0.5,%f]",_nTotF*0.7,_nTotF*1.5));
+  
   _work->factory("SUM::pdfPass(nSigP*sigPass,nBkgP*bkgPass)");
   
   if (isaddGaus) {
+     cout<<"Adding Gaussian"<<endl;
     _work->factory("SUM::pdfFail(expr('sigFracF*nSigF',{sigFracF,nSigF})*sigFail,nBkgF*bkgFail, expr('(1.-sigFracF)*nSigF',{sigFracF,nSigF})*sigGaussFail)");
   } 
   else {
@@ -204,13 +210,7 @@ void tnpFitter::fits(bool mcTruth,bool isMC,string title, bool isaddGaus) {
   c.Write(TString::Format("%s_Canv",_histname_base.c_str()),TObject::kOverwrite);
   resPass->Write(TString::Format("%s_resP",_histname_base.c_str()),TObject::kOverwrite);
   resFail->Write(TString::Format("%s_resF",_histname_base.c_str()),TObject::kOverwrite);
-
-  
 }
-
-
-
-
 
 /////// Stupid parameter dumper /////////
 void tnpFitter::textParForCanvas(RooFitResult *resP, RooFitResult *resF,TPad *p) {

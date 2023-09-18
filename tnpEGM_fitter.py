@@ -145,6 +145,7 @@ if  args.doFit:
     sampleToFit.dump()
     def parallel_fit(ib):
         if (args.binNumber >= 0 and ib == args.binNumber) or args.binNumber < 0:
+            print("Gaussian Status: ",args.addGaus)
             if args.altSig and not args.addGaus:
                 tnpRoot.histFitterAltSig(  sampleToFit, tnpBins['bins'][ib], tnpConf.tnpParAltSigFit )
             elif args.altSig and args.addGaus:

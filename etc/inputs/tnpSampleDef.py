@@ -22,8 +22,11 @@ eosRun3 = '/eos/cms/store/group/phys_egamma/ec/fmausolf/EGM_comm/'
 
 eos_Run3_124X = '/eos/cms/store/group/phys_egamma/tnpTuples/bjoshi/2023-04-25/2022/'
 eos_Run3_PromptReco = '/eos/cms/store/group/phys_egamma/tnpTuples/bjoshi/2023-04-25/2022/'
+eos_Run3_ReReco = '/eos/cms/store/group/phys_egamma/tnpTuples/bjoshi/2023-08-15/2022/'
 eos_Reco_Run3_PromptReco = '/eos/cms/store/group/phys_egamma/tnpTuples/bjoshi/2023-05-01/2022/data/'
 eos_Reco_Run3_124X = '/eos/cms/store/group/phys_egamma/tnpTuples/bjoshi/2023-02-09/2022/mc/'
+
+eos_Run3_PromptReco_2023 = '/eos/cms/store/group/phys_egamma/tnpTuples/bjoshi/2023-09-17/2022/'
 
 
 ReReco2017 = {
@@ -177,11 +180,16 @@ Run3_124X_PromptReco2022G = {
         'DY_1j_madgraph_postEE'    : tnpSample('DY_1j_madgraph_postEE', eos_Run3_124X + '/mc/TnPTree_DYJetsToLL_M-50_TuneCP5_13p6TeV-madgraphMLM-pythia8_2022_DY_LO_postEE.root', isMC=True, nEvts = 96505000),
         'data_Run2022G': tnpSample('data_Run2022G', eos_Run3_PromptReco + '/data/TnPTree_EGamma_2022_Run2022G.root', lumi = 3.1219)}
 
-Run3_124X_PromptReco_preEE = {
-        'DY_1j_madgraph'    : tnpSample('DY_1j_madgraph', eos_Run3_PromptReco + '/mc/TnPTree_DYJetsToLL_M-50_TuneCP5_13p6TeV-madgraphMLM-pythia8_2022_DY_LO.root', isMC=True, nEvts = 27310302),
-        'data_Run2022B': tnpSample('data_Run2022B', eos_Run3_PromptReco + '/data/TnPTree_EGamma_2022_Run2022B.root', lumi = 0.0975),
-        'data_Run2022C': tnpSample('data_Run2022C', eos_Run3_PromptReco + '/data/TnPTree_EGamma_2022_Run2022C.root', lumi = 5.0702),
-        'data_Run2022D': tnpSample('data_Run2022D', eos_Run3_PromptReco + '/data/TnPTree_EGamma_2022_Run2022D.root', lumi = 1.8260),
+Run3_124X_ReReco_preEE = {
+        'DY_1j_madgraph'    : tnpSample('DY_1j_madgraph', eos_Run3_ReReco + '/mc/TnPTree_DYJetsToLL_M-50_TuneCP5_13p6TeV-madgraphMLM-pythia8_2022_DY_LO.root', isMC=True, nEvts = 27310302),
+        'data_Run2022B': tnpSample('data_Run2022B', eos_Run3_ReReco + '/data/TnPTree_EGamma_2022_Run2022B.root', lumi = 0.0976),
+        'data_Run2022C': tnpSample('data_Run2022C', eos_Run3_ReReco + '/data/TnPTree_EGamma_2022_Run2022C.root', lumi = 4.938),
+        'data_Run2022D': tnpSample('data_Run2022D', eos_Run3_ReReco + '/data/TnPTree_EGamma_2022_Run2022D.root', lumi = 2.906),
+        }
+
+Run3_124X_ReReco_postEE = {
+        'DY_1j_madgraph_postEE'    : tnpSample('DY_1j_madgraph_postEE', eos_Run3_124X + '/mc/TnPTree_DYJetsToLL_M-50_TuneCP5_13p6TeV-madgraphMLM-pythia8_2022_DY_LO_postEE.root', isMC=True, nEvts = 96505000),
+        'data_Run2022E': tnpSample('data_Run2022E', eos_Run3_ReReco + '/data/TnPTree_EGamma_2022_Run2022E.root', lumi = 5.622),
         }
 
 Run3_124X_PromptReco_postEE = {
@@ -197,3 +205,10 @@ Run3_Reco_124X_PromptReco_postEE = {
         'data_Run2022F': tnpSample('data_Run2022F', eos_Reco_Run3_PromptReco + '/TnPTree_EGamma_2022_Run2022F.root', lumi = 18.0064),
         'data_Run2022G': tnpSample('data_Run2022G', eos_Reco_Run3_PromptReco + '/TnPTree_EGamma_2022_Run2022G.root', lumi = 3.1219)
         }
+
+Run3_124X_PromptReco_2023 = {
+        'DY_1j_madgraph'    : tnpSample('DY_1j_madgraph', eos_Run3_ReReco + '/mc/TnPTree_DYJetsToLL_M-50_TuneCP5_13p6TeV-madgraphMLM-pythia8_2022_DY_LO.root', isMC=True, nEvts = 27310302),
+        'data_Run2023C': tnpSample('data_Run2023C', eos_Run3_PromptReco_2023 + '/data/TnPTree_2023_Run2023C-EGamma0-EGamma1.root', lumi = 10.61),
+        'data_Run2023D': tnpSample('data_Run2023D', eos_Run3_PromptReco_2023 + '/data/TnPTree_2023_Run2023D-EGamma0-EGamma1.root', lumi = 1.670),
+        }
+

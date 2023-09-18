@@ -11,14 +11,14 @@ flags = {
     'passingCutBasedLoose94XV2'     : '(passingCutBasedLoose94XV2 == 1)',
     'passingCutBasedMedium94XV2'    : '(passingCutBasedMedium94XV2 == 1)',
     'passingCutBasedTight94XV2'     : '(passingCutBasedTight94XV2 == 1)',
-    'passingCutBasedVeto122XV1'     : '(passingCutBasedVeto122XV1   == 1)',
-    'passingCutBasedLoose122XV1'    : '(passingCutBasedLoose122XV1  == 1)',
-    'passingCutBasedMedium122XV1'   : '(passingCutBasedMedium122XV1 == 1)',
-    'passingCutBasedTight122XV1'    : '(passingCutBasedTight122XV1  == 1)',
     'passingMVA94Xwp80isoV2'        : '(passingMVA94Xwp80isoV2 == 1 )',
     'passingMVA94Xwp80noisoV2'      : '(passingMVA94Xwp80noisoV2 == 1 )',
     'passingMVA94Xwp90isoV2'        : '(passingMVA94Xwp90isoV2 == 1 )',
     'passingMVA94Xwp90noisoV2'      : '(passingMVA94Xwp90noisoV2 == 1 )',
+    'passingCutBasedVeto122XV1'     : '(passingCutBasedVeto122XV1   == 1)',
+    'passingCutBasedLoose122XV1'    : '(passingCutBasedLoose122XV1  == 1)',
+    'passingCutBasedMedium122XV1'   : '(passingCutBasedMedium122XV1 == 1)',
+    'passingCutBasedTight122XV1'    : '(passingCutBasedTight122XV1  == 1)',
     'passingMVA122Xwp80isoV1'       : '(passingMVA122Xwp80isoV1 == 1)',
     'passingMVA122Xwp90isoV1'       : '(passingMVA122Xwp90isoV1 == 1)',
     'passingMVA122Xwp80noisoV1'     : '(passingMVA122Xwp80noisoV1 == 1)',
@@ -28,7 +28,8 @@ flags = {
     'passingMVA122XwpHZZisoV1'      : '(passingMVA122XwpHZZisoV1 == 1)'
     }
 
-baseOutDir = '/eos/user/b/bjoshi/www/EGM/TnP/PromptReco_official/tnpEleID_PromptReco2022FG/'
+baseOutDir = '/eos/user/b/bjoshi/www/EGM/TnP/PromptReco_official/tnpEleID_ReReco2022E/'
+puFile = '/eos/cms/store/group/phys_egamma/tnpTuples/bjoshi/2023-08-15/2022/pu/DY_1j_madgraph_ReReco2022E_tnpEleIDs.pu.puTree.root'
 
 #############################################################
 ########## samples definition  - preparing the samples
@@ -38,17 +39,14 @@ baseOutDir = '/eos/user/b/bjoshi/www/EGM/TnP/PromptReco_official/tnpEleID_Prompt
 import etc.inputs.tnpSampleDef as tnpSamples
 tnpTreeDir = 'tnpEleIDs'
 
-
 samplesDef = {
-        'data'  : tnpSamples.Run3_124X_PromptReco2022F['data_Run2022F'].clone(),
-        'mcNom' : tnpSamples.Run3_124X_PromptReco2022F['DY_1j_madgraph_postEE'].clone(),
-        'tagSel': tnpSamples.Run3_124X_PromptReco2022F['DY_1j_madgraph_postEE'].clone(),
+        'data'  : tnpSamples.Run3_124X_ReReco_postEE['data_Run2022E'].clone(),
+        'mcNom' : tnpSamples.Run3_124X_ReReco_postEE['DY_1j_madgraph_postEE'].clone(),
+        'tagSel': tnpSamples.Run3_124X_ReReco_postEE['DY_1j_madgraph_postEE'].clone(),
         'mcAlt': None,
     }
 
 ## can add data sample easily
-
-samplesDef['data'].add_sample(tnpSamples.Run3_124X_PromptReco2022G['data_Run2022G'].clone()) 
 
 ## some sample-based cuts... general cuts defined here after
 ## require mcTruth on MC DY samples and additional cuts
@@ -64,7 +62,7 @@ if not samplesDef['mcNom' ] is None: samplesDef['mcNom' ].set_mcTruth()
 if not samplesDef['mcAlt' ] is None: samplesDef['mcAlt' ].set_mcTruth()
 if not samplesDef['tagSel'] is None: samplesDef['tagSel'].set_mcTruth()
 if not samplesDef['tagSel'] is None:
-    samplesDef['tagSel'].rename('mcAltSel_DY_madgraph_postEE')
+    samplesDef['tagSel'].rename('mcAltSel_DY_madgraph')
     samplesDef['tagSel'].set_cut('tag_Ele_pt > 37') #canceled non trig MVA cut
 
 ## set MC weight, simple way (use tree weight) 
@@ -74,8 +72,7 @@ if not samplesDef['tagSel'] is None:
 #if not samplesDef['tagSel'] is None: samplesDef['tagSel'].set_weight(weightName)
 
 ## set MC weight, can use several pileup rw for different data taking periods
-puFile = '/eos/cms/store/group/phys_egamma/tnpTuples/bjoshi/2023-04-25/2022/pu/DY_1j_madgraph_PromptReco2022FG_tnpEleID.pu.puTree.root'
-weightName = 'weights_2022_runFG.totWeight'
+weightName = 'weights_2022_runE.totWeight'
 if not samplesDef['mcNom' ] is None: samplesDef['mcNom' ].set_weight(weightName)
 if not samplesDef['mcAlt' ] is None: samplesDef['mcAlt' ].set_weight(weightName)
 if not samplesDef['tagSel'] is None: samplesDef['tagSel'].set_weight(weightName)
@@ -118,22 +115,12 @@ additionalCuts = {
 #############################################################
 ########## fitting params to tune fit by hand if necessary
 #############################################################
-'''
 tnpParNomFit = [
     "meanP[-0.0,-5.0,5.0]","sigmaP[0.9,0.5,5.0]",
     "meanF[-0.0,-5.0,5.0]","sigmaF[0.9,0.5,5.0]",
     "acmsP[60.,50.,80.]","betaP[0.05,0.01,0.08]","gammaP[0.1, -2, 2]","peakP[90.0]",
     "acmsF[60.,50.,80.]","betaF[0.05,0.01,0.08]","gammaF[0.1, -2, 2]","peakF[90.0]",
     ]
-'''
-tnpParNomFit = [
-    "meanP[-0.0,-5.0,5.0]","sigmaP[0.9,0.5,5.0]",
-    "meanF[-0.0,-5.0,5.0]","sigmaF[0.9,0.5,5.0]",
-    "acmsP[60.,50.,80.]","betaP[0.05,0.01,0.08]","gammaP[0.1, -2, 2]","peakP[90.0]",
-    "acmsF[60.,50.,80.]","betaF[0.05,0.01,0.08]","gammaF[0.1, -2, 2]","peakF[90.0]",
-    "peak[50.0,40.0,70.0]","tau[-1.0,-10.0,0.0]"
-    ]
-
 
 tnpParAltSigFit = [
     "meanP[-0.0,-5.0,5.0]","sigmaP[1,0.7,6.0]","alphaP[2.0,1.2,3.5]" ,'nP[3,-5,5]',"sigmaP_2[1.5,0.5,6.0]","sosP[1,0.5,5.0]",

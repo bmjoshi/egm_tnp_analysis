@@ -9,7 +9,7 @@ results/
 .__afs0E8E
 .__afs0DB3
 
-SubmitAll.sh
+SubmitAll*.sh
 
 etc/*.pyc
 etc/config/*.pyc
